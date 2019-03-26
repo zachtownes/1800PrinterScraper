@@ -678,13 +678,13 @@ with open("c:/windows/temp/extip.log", "w") as outfile:
 						"PrinterName": printerName,
 						"PrinterIP": printerIp,
 						"BlackModel": "Printer Web Interface Failed",
-						"BlackLevel": "Printer Web Interface Failed",
+						"BlackLevel": 0,
 						"CyanModel": "Printer Web Interface Failed",
-						"CyanLevel": "Printer Web Interface Failed",
+						"CyanLevel": 0,
 						"MagentaModel": "Printer Web Interface Failed",
-						"MagentaLevel": "Printer Web Interface Failed",
+						"MagentaLevel": 0,
 						"YellowModel": "Printer Web Interface Failed",
-						"YellowLevel": "Printer Web Interface Failed",
+						"YellowLevel": 0,
 						}
 					upload = requests.post(url, verify=False, json=data)
 					print(upload.status_code)
@@ -695,13 +695,13 @@ with open("c:/windows/temp/extip.log", "w") as outfile:
 				"PrinterName": printerName,
 				"PrinterIP": printerIp,
 				"BlackModel": "Printer Web Interface Failed",
-				"BlackLevel": "Printer Web Interface Failed",
+				"BlackLevel": 404,
 				"CyanModel": "Printer Web Interface Failed",
-				"CyanLevel": "Printer Web Interface Failed",
+				"CyanLevel": 404,
 				"MagentaModel": "Printer Web Interface Failed",
-				"MagentaLevel": "Printer Web Interface Failed",
+				"MagentaLevel": 404,
 				"YellowModel": "Printer Web Interface Failed",
-				"YellowLevel": "Printer Web Interface Failed",
+				"YellowLevel": 404,
 				}
 			upload = requests.post(url, verify=False, json=data)
 			print(upload.status_code)
