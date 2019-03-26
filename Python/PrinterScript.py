@@ -1,11 +1,4 @@
 with open("c:/windows/temp/extip.log", "w") as outfile:
-	from email.mime.text import MIMEText
-	outfile.write("Imported MIMEText\n")
-	from email.mime.multipart import MIMEMultipart
-	outfile.write("Imported MIMEMultipart\n")
-	from email.mime.base import MIMEBase
-	outfile.write("Imported MIMEBase\n")
-	from email import encoders
 	outfile.write("Importated Encoders\n")
 	import time
 	outfile.write("Imported Time\n")	
