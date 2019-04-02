@@ -41,80 +41,88 @@ with open("c:/windows/temp/extip.log", "w") as outfile:
 					Black = Black.getText().strip()
 					Black = Black.replace('\r', '').replace('\n', '').replace("Order","").replace("?", "").replace("†","")
 					Black = Black.replace('Black Cartridge', ' ').replace(' ', '')
-					BlackValue = tonerValues[0].getText()
-					BlackValue = BlackValue.replace('\r', '').replace('\n', '').replace(' ', '').replace("†","").replace("*","").replace("%","").replace('<', '').replace('‡','')
-					if ('-' in BlackValue):
-						BlackValue = '0'
-					BlackToner = Black + " " + BlackValue
+					BlackLevel = tonerValues[0].getText()
+					BlackLevel = BlackLevel.replace('\r', '').replace('\n', '').replace(' ', '').replace("†","").replace("*","").replace("%","").replace('‡','')
+					if ('-' in BlackLevel):
+						BlackLevel = '0'
+					if ('<' in BlackLevel):
+						BlackLevel = '0'
+					BlackToner = Black + " " + BlackLevel
 					print(BlackToner)
 				except IndexError:
 					Black= ""
-					BlackValue = "" 
+					BlackLevel = "" 
 				try:
 					Cyan = tonerTables[1]
 					Cyan = Cyan.getText().strip()
 					Cyan = Cyan.replace('\r', '').replace('\n', '').replace("Order","").replace("?", "").replace("†","")
 					Cyan = Cyan.replace('Cyan Cartridge', ' ').replace(' ', '')
-					CyanValue = tonerValues[1].getText()
-					CyanValue = CyanValue.replace('\r', '').replace('\n', '').replace(' ', '').replace("†","").replace("*","").replace("%","").replace('<', '').replace('‡','')
-					if('-' in CyanValue):
-						CyanValue = '0'
-					CyanToner = Cyan + " " + CyanValue
+					CyanLevel = tonerValues[1].getText()
+					CyanLevel = CyanLevel.replace('\r', '').replace('\n', '').replace(' ', '').replace("†","").replace("*","").replace("%","").replace('‡','')
+					if('-' in CyanLevel):
+						CyanLevel = '0'
+					if('<' in CyanLevel):
+						CyanLevel = '0'
+					CyanToner = Cyan + " " + CyanLevel
 					print(CyanToner)
 				except IndexError:
 					Cyan = ""
-					CyanValue = ""
+					CyanLevel = ""
 				try:
 					Magenta = tonerTables[2]
 					Magenta = Magenta.getText().strip()
 					Magenta = Magenta.replace('\r', '').replace('\n', '').replace("Order","").replace("?", "").replace("†","")
 					Magenta = Magenta.replace('Magenta Cartridge', ' ').replace(' ', '')
-					MagentaValue = tonerValues[2].getText()
-					MagentaValue = MagentaValue.replace('\r', '').replace('\n', '').replace(' ', '').replace("†","").replace("*","").replace("%","").replace('<', '').replace('‡','')
-					if('-' in MagentaValue):
-						MagentaValue = '0'
-					MagentaToner = Magenta + " " + MagentaValue
+					MagentaLevel = tonerValues[2].getText()
+					MagentaLevel = MagentaLevel.replace('\r', '').replace('\n', '').replace(' ', '').replace("†","").replace("*","").replace("%","").replace('‡','')
+					if('-' in MagentaLevel):
+						MagentaLevel = '0'
+					if('<' in MagentaLevel):
+						MagentaLevel = '0'
+					MagentaToner = Magenta + " " + MagentaLevel
 					print(MagentaToner)
 				except IndexError:
 					Magenta = ""
-					MagentaValue = ""
+					MagentaLevel = ""
 				try:
 					Yellow = tonerTables[3]
 					Yellow = Yellow.getText().strip()
 					Yellow = Yellow.replace('\r', '').replace('\n', '').replace("Order","").replace("?", "").replace("†","")
 					Yellow = Yellow.replace('Yellow Cartridge', ' ').replace(' ', '')
-					YellowValue = tonerValues[3].getText()
-					YellowValue = YellowValue.replace('\r', '').replace('\n', '').replace(' ', '').replace("†","").replace("*","").replace("%","").replace('<', '').replace('‡','')
-					if( '-' in YellowValue):
-						YellowValue = '0'
-					YellowToner = Yellow + " " + YellowValue
+					YellowLevel = tonerValues[3].getText()
+					YellowLevel = YellowLevel.replace('\r', '').replace('\n', '').replace(' ', '').replace("†","").replace("*","").replace("%","").replace('‡','')
+					if( '-' in YellowLevel):
+						YellowLevel = '0'
+					if('<' in YellowLevel):
+						YellowLevel = '0'
+					YellowToner = Yellow + " " + YellowLevel
 					print(YellowToner)
 				except IndexError:
 					Yellow = ""
-					YellowValue = ""
+					YellowLevel = ""
 				url = "http://ctacinv/api/PrinterLevels?PythonScript=true"
 				data = {
 					"PrinterName": printerName,
 					"PrinterIP": printerIp,
 					"BlackModel": Black,
-					"BlackLevel": BlackValue,
+					"BlackLevel": BlackLevel,
 					"CyanModel": Cyan,
-					"CyanLevel": CyanValue,
+					"CyanLevel": CyanLevel,
 					"MagentaModel": Magenta,
-					"MagentaLevel": MagentaValue,
+					"MagentaLevel": MagentaLevel,
 					"YellowModel": Yellow,
-					"YellowLevel": YellowValue,
+					"YellowLevel": YellowLevel,
 					}
 				upload = requests.post(url, verify=False, json=data)
 				print(upload.status_code)
 				del Black
-				del BlackValue
+				del BlackLevel
 				del Cyan
-				del CyanValue
+				del CyanLevel
 				del Magenta
-				del MagentaValue
+				del MagentaLevel
 				del Yellow
-				del YellowValue
+				del YellowLevel
 			tonerArea2 = soup.find(id="DeviceStatusSuppliesSectionId")
 			if(tonerArea2):
 				for i in range(5):
@@ -132,19 +140,19 @@ with open("c:/windows/temp/extip.log", "w") as outfile:
 					if("Black" in TonerName):
 						print("BLACK!")
 						BlackModel = TonerModel.replace("Order","").replace("?", "").replace("†","").replace("*","").replace("%","")
-						BlackLevel = TonerLevel.replace("†","").replace("*","").replace("%","").replace('<', '').replace('‡','')
+						BlackLevel = TonerLevel.replace("†","").replace("*","").replace("%","").replace('‡','')
 						if('-' in BlackLevel):
 							BlackLevel = '0'
 					if("cyan" in TonerName):
 						print("CYAN!")
 						CyanModel = TonerModel.replace("Order","").replace("?", "").replace("†","")
-						CyanLevel = TonerLevel.replace("†","").replace("*","").replace("%","").replace('<', '').replace('‡','')
+						CyanLevel = TonerLevel.replace("†","").replace("*","").replace("%","").replace('‡','')
 						if('-' in CyanLevel):
 							CyanLevel = '0'
 					if("Magenta" in TonerName):
 						print("MAGENTA!")
 						MagentaModel = TonerModel.replace("Order","").replace("?", "").replace("†","")
-						MagentaLevel = TonerLevel.replace("†","").replace("*","").replace("%","").replace('<', '').replace('‡','')
+						MagentaLevel = TonerLevel.replace("†","").replace("*","").replace("%","").replace('‡','')
 						if('-' in MagentaLevel):
 							MagentaLevel = '0'
 					if("Yellow" in TonerName):
@@ -156,7 +164,7 @@ with open("c:/windows/temp/extip.log", "w") as outfile:
 					if("Maint" in TonerName):
 						print("MAINTINENCE!")
 						MaintinenceModel = TonerModel.replace("Order","").replace("?", "").replace("†","")
-						MaintinenceLevel = TonerLevel.replace("†","").replace("*","").replace("%","").replace('<', '').replace('‡','')
+						MaintinenceLevel = TonerLevel.replace("†","").replace("*","").replace("%","").replace('‡','')
 						if('-' in MaintinenceLevel):
 							MaintinenceLevel = '0'
 				try: 
@@ -184,6 +192,14 @@ with open("c:/windows/temp/extip.log", "w") as outfile:
 				except NameError:
 					MaintinenceModel = ""
 					MaintinenceLevel = ""
+				if ('<' in BlackLevel):
+						BlackLevel = '0'
+				if('<' in CyanLevel):
+						CyanLevel = '0'
+				if('<' in MagentaLevel):
+						MagentaLevel = '0'
+				if('<' in YellowLevel):
+						YellowLevel = '0'
 				url = "http://ctacinv/api/PrinterLevels?PythonScript=true"
 				data = {
 					"PrinterName": printerName,
@@ -237,28 +253,28 @@ with open("c:/windows/temp/extip.log", "w") as outfile:
 							print("CYAN!")
 							CyanModel = TonerModel.replace('\r', '').replace('\n', '').replace("Order","").replace("?", "").replace("†","")
 							TonerLevel = TonerName.replace("Cyan Cartridge", "").replace('\r', '').replace('\n', '').replace("Order","").replace("?", "").replace("†","").strip()
-							CyanLevel = TonerLevel.replace("†","").replace("*","").replace("%","").replace('<', '').replace('‡','')
+							CyanLevel = TonerLevel.replace("†","").replace("*","").replace("%","").replace('‡','')
 							if('-' in CyanLevel):
 								CyanLevel = '0'
 						if("Magenta" in TonerName):
 							print("MAGENTA!")
 							MagentaModel = TonerModel.replace('\r', '').replace('\n', '').replace("Order","").replace("?", "").replace("†","")
 							TonerLevel = TonerName.replace("Magenta Cartridge", "").replace('\r', '').replace('\n', '').replace("Order","").replace("?", "").replace("†","").strip()
-							MagentaLevel = TonerLevel.replace("†","").replace("*","").replace("%","").replace('<', '').replace('‡','')
+							MagentaLevel = TonerLevel.replace("†","").replace("*","").replace("%","").replace('‡','')
 							if('-' in MagentaLevel):
 								MagentaLevel = '0'
 						if("Yellow" in TonerName):
 							print("YELLOW!")
 							YellowModel = TonerModel.replace('\r', '').replace('\n', '').replace("Order","").replace("?", "").replace("†","")
 							TonerLevel = TonerName.replace("Yellow Cartridge", "").replace('\r', '').replace('\n', '').replace("Order","").replace("?", "").replace("†","").strip()
-							YellowLevel = TonerLevel.replace("†","").replace("*","").replace("%","").replace('<', '').replace('‡','')
+							YellowLevel = TonerLevel.replace("†","").replace("*","").replace("%","").replace('‡','')
 							if('-' in YellowLevel):
 								YellowLevel = '0'
 						if("Maint" in TonerName):
 							print("MAINTINENCE!")
 							MaintinenceModel = TonerModel.replace('\r', '').replace('\n', '').replace("Order","").replace("?", "").replace("†","")
 							TonerLevel = TonerName.replace("Maintenance Kit", "").replace('\r', '').replace('\n', '').replace("Order","").replace("?", "").replace("†","").strip()
-							MaintinenceLevel = TonerLevel.replace("†","").replace("*","").replace("%","").replace('<', '').replace('‡','')
+							MaintinenceLevel = TonerLevel.replace("†","").replace("*","").replace("%","").replace('‡','')
 							if('-' in MaintinenceLevel):
 								MaintinenceLevel = '0'
 				except IndexError:
@@ -308,6 +324,14 @@ with open("c:/windows/temp/extip.log", "w") as outfile:
 					MaintinenceLevel = ""
 					print(MaintinenceModel)
 					print(MaintinenceLevel)
+				if ('<' in BlackLevel):
+						BlackLevel = '0'
+				if('<' in CyanLevel):
+						CyanLevel = '0'
+				if('<' in MagentaLevel):
+						MagentaLevel = '0'
+				if('<' in YellowLevel):
+						YellowLevel = '0'
 				url = "http://ctacinv/api/PrinterLevels?PythonScript=true"
 				data = {
 					"PrinterName": printerName,
@@ -344,80 +368,88 @@ with open("c:/windows/temp/extip.log", "w") as outfile:
 					Black = Black.getText().strip()
 					Black = Black.replace('\r', '').replace('\n', '').replace("Order","").replace("?", "").replace("†","")
 					Black = Black.replace('Black Cartridge', ' ').replace(' ', '')
-					BlackValue = tonerValues[0].getText()
-					BlackValue = BlackValue.replace('\r', '').replace('\n', '').replace(' ', '').replace("†","").replace("*","").replace("%","").replace('<', '').replace('‡','')
-					if('-' in BlackValue):
-						BlackValue = '0'
-					BlackToner = Black + " " + BlackValue
+					BlackLevel = tonerValues[0].getText()
+					BlackLevel = BlackLevel.replace('\r', '').replace('\n', '').replace(' ', '').replace("†","").replace("*","").replace("%","").replace('‡','')
+					if('-' in BlackLevel):
+						BlackLevel = '0'
+					BlackToner = Black + " " + BlackLevel
 					print(BlackToner)
 				except IndexError:
 					Black= ""
-					BlackValue = ""
+					BlackLevel = ""
 				try:
 					Cyan = tonerTables[6].find('td')
 					Cyan = Cyan.getText().strip()
 					Cyan = Cyan.replace('\r', '').replace('\n', '').replace("Order","").replace("?", "").replace("†","")
 					Cyan = Cyan.replace('Cyan Cartridge', ' ').replace(' ', '')
-					CyanValue = tonerValues[1].getText()
-					CyanValue = CyanValue.replace('\r', '').replace('\n', '').replace(' ', '').replace("†","").replace("*","").replace("%","").replace('<', '').replace('‡','')
-					if('-' in CyanValue):
-						CyanValue = '0'
-					CyanToner = Cyan + " " + CyanValue
+					CyanLevel = tonerValues[1].getText()
+					CyanLevel = CyanLevel.replace('\r', '').replace('\n', '').replace(' ', '').replace("†","").replace("*","").replace("%","").replace('‡','')
+					if('-' in CyanLevel):
+						CyanLevel = '0'
+					CyanToner = Cyan + " " + CyanLevel
 					print(CyanToner)
 				except IndexError:
 					Cyan = ""
-					CyanValue = ""
+					CyanLevel = ""
 				try:
 					Magenta = tonerTables[11].find('td')
 					Magenta = Magenta.getText().strip()
 					Magenta = Magenta.replace('\r', '').replace('\n', '').replace("Order","").replace("?", "").replace("†","")
 					Magenta = Magenta.replace('Magenta Cartridge', ' ').replace(' ', '')
-					MagentaValue = tonerValues[2].getText()
-					MagentaValue = MagentaValue.replace('\r', '').replace('\n', '').replace(' ', '').replace("†","").replace("*","").replace("%","").replace('<', '').replace('‡','')
-					if('-' in MagentaValue):
-						MagentaValue = '0'
-					MagentaToner = Magenta + " " + MagentaValue
+					MagentaLevel = tonerValues[2].getText()
+					MagentaLevel = MagentaLevel.replace('\r', '').replace('\n', '').replace(' ', '').replace("†","").replace("*","").replace("%","").replace('‡','')
+					if('-' in MagentaLevel):
+						MagentaLevel = '0'
+					MagentaToner = Magenta + " " + MagentaLevel
 					print(MagentaToner)
 				except IndexError:
 					Magenta = ""
-					MagentaValue = ""
+					MagentaLevel = ""
 				try:
 					Yellow = tonerTables[15].find('td')
 					Yellow = Yellow.getText().strip()
 					Yellow = Yellow.replace('\r', '').replace('\n', '').replace("Order","").replace("?", "").replace("†","")
 					Yellow = Yellow.replace('Yellow Cartridge', ' ').replace(' ', '')
-					YellowValue = tonerValues[3].getText()
-					YellowValue = YellowValue.replace('\r', '').replace('\n', '').replace(' ', '').replace("†","").replace("*","").replace("%","").replace('<', '').replace('‡','')
-					if('-' in YellowValue):
-						YellowValue = '0'
-					YellowToner = Yellow + " " + YellowValue
+					YellowLevel = tonerValues[3].getText()
+					YellowLevel = YellowLevel.replace('\r', '').replace('\n', '').replace(' ', '').replace("†","").replace("*","").replace("%","").replace('‡','')
+					if('-' in YellowLevel):
+						YellowLevel = '0'
+					YellowToner = Yellow + " " + YellowLevel
 					print(YellowToner)
 				except IndexError:
 					Yellow = ""
-					YellowValue = ""
+					YellowLevel = ""
+				if ('<' in BlackLevel):
+						BlackLevel = '0'
+				if('<' in CyanLevel):
+						CyanLevel = '0'
+				if('<' in MagentaLevel):
+						MagentaLevel = '0'
+				if('<' in YellowLevel):
+						YellowLevel = '0'
 				url = "http://ctacinv/api/PrinterLevels?PythonScript=true"
 				data = {
 					"PrinterName": printerName,
 					"PrinterIP": printerIp,
 					"BlackModel": Black,
-					"BlackLevel": BlackValue,
+					"BlackLevel": BlackLevel,
 					"CyanModel": Cyan,
-					"CyanLevel": CyanValue,
+					"CyanLevel": CyanLevel,
 					"MagentaModel": Magenta,
-					"MagentaLevel": MagentaValue,
+					"MagentaLevel": MagentaLevel,
 					"YellowModel": Yellow,
-					"YellowLevel": YellowValue,
+					"YellowLevel": YellowLevel,
 					}
 				upload = requests.post(url, verify=False, json=data)
 				print(upload.status_code)
 				del Black
-				del BlackValue
+				del BlackLevel
 				del Cyan
-				del CyanValue
+				del CyanLevel
 				del Magenta
-				del MagentaValue
+				del MagentaLevel
 				del Yellow
-				del YellowValue
+				del YellowLevel
 			tonerArea4 = soup.find(class_="mainContentArea width100 pad10")
 			if(tonerArea4):
 				tonerTables = tonerArea4.findAll(class_="width100")
@@ -427,80 +459,88 @@ with open("c:/windows/temp/extip.log", "w") as outfile:
 					Black = Black.getText().strip()
 					Black = Black.replace('\r', '').replace('\n', '').replace("Order","").replace("?", "").replace("†","")
 					Black = Black.replace('Black Cartridge', ' ').replace(' ', '')
-					BlackValue = tonerValues[0].getText()
-					BlackValue = BlackValue.replace('\r', '').replace('\n', '').replace(' ', '').replace("†","").replace("*","").replace("%","").replace('<', '').replace('‡','')
-					if('-' in BlackValue):
-						BlackValue = '0'
-					BlackToner = Black + " " + BlackValue
+					BlackLevel = tonerValues[0].getText()
+					BlackLevel = BlackLevel.replace('\r', '').replace('\n', '').replace(' ', '').replace("†","").replace("*","").replace("%","").replace('‡','')
+					if('-' in BlackLevel):
+						BlackLevel = '0'
+					BlackToner = Black + " " + BlackLevel
 					print(BlackToner)
 				except IndexError:
 					Black= ""
-					BlackValue = "" 
+					BlackLevel = "" 
 				try:
 					Cyan = tonerTables[2].find('td')
 					Cyan = Cyan.getText().strip()
 					Cyan = Cyan.replace('\r', '').replace('\n', '').replace("Order","").replace("?", "").replace("†","")
 					Cyan = Cyan.replace('Cyan Cartridge', ' ').replace(' ', '')
-					CyanValue = tonerValues[1].getText()
-					CyanValue = CyanValue.replace('\r', '').replace('\n', '').replace(' ', '').replace("†","").replace("*","").replace("%","").replace('<', '').replace('‡','')
-					if('-' in CyanValue):
-						CyanValue = '0'
-					CyanToner = Cyan + " " + CyanValue
+					CyanLevel = tonerValues[1].getText()
+					CyanLevel = CyanLevel.replace('\r', '').replace('\n', '').replace(' ', '').replace("†","").replace("*","").replace("%","").replace('‡','')
+					if('-' in CyanLevel):
+						CyanLevel = '0'
+					CyanToner = Cyan + " " + CyanLevel
 					print(CyanToner)
 				except IndexError:
 					Cyan = ""
-					CyanValue = ""
+					CyanLevel = ""
 				try:
 					Magenta = tonerTables[4].find('td')
 					Magenta = Magenta.getText().strip()
 					Magenta = Magenta.replace('\r', '').replace('\n', '').replace("Order","").replace("?", "").replace("†","")
 					Magenta = Magenta.replace('Magenta Cartridge', ' ').replace(' ', '')
-					MagentaValue = tonerValues[2].getText()
-					MagentaValue = MagentaValue.replace('\r', '').replace('\n', '').replace(' ', '').replace("†","").replace("*","").replace("%","").replace('<', '').replace('‡','')
-					if('-' in MagentaValue):
-						MagentaValue = '0'
-					MagentaToner = Magenta + " " + MagentaValue
+					MagentaLevel = tonerValues[2].getText()
+					MagentaLevel = MagentaLevel.replace('\r', '').replace('\n', '').replace(' ', '').replace("†","").replace("*","").replace("%","").replace.replace('‡','')
+					if('-' in MagentaLevel):
+						MagentaLevel = '0'
+					MagentaToner = Magenta + " " + MagentaLevel
 					print(MagentaToner)
 				except IndexError:
 					Magenta = ""
-					MagentaValue = ""
+					MagentaLevel = ""
 				try:
 					Yellow = tonerTables[6].find('td')
 					Yellow = Yellow.getText().strip()
 					Yellow = Yellow.replace('\r', '').replace('\n', '').replace("Order","").replace("?", "").replace("†","")
 					Yellow = Yellow.replace('Yellow Cartridge', ' ').replace(' ', '')
-					YellowValue = tonerValues[3].getText()
-					YellowValue = YellowValue.replace('\r', '').replace('\n', '').replace(' ', '').replace("†","").replace("*","").replace("%","").replace('<', '').replace('‡','')
-					if('-' in YellowValue):
-						YellowValue = '0'
-					YellowToner = Yellow + " " + YellowValue
+					YellowLevel = tonerValues[3].getText()
+					YellowLevel = YellowLevel.replace('\r', '').replace('\n', '').replace(' ', '').replace("†","").replace("*","").replace("%","").replace('‡','')
+					if('-' in YellowLevel):
+						YellowLevel = '0'
+					YellowToner = Yellow + " " + YellowLevel
 					print(YellowToner)
 				except IndexError:
 					Yellow = ""
-					YellowValue = ""
+					YellowLevel = ""
+				if ('<' in BlackValue):
+						BlackValue = '0'
+				if('<' in CyanValue):
+						CyanValue = '0'
+				if('<' in MagentaValue):
+						MagentaValue = '0'
+				if('<' in YellowValue):
+						YellowValue = '0'
 				url = "http://ctacinv/api/PrinterLevels?PythonScript=true"
 				data = {
 					"PrinterName": printerName,
 					"PrinterIP": printerIp,
 					"BlackModel": Black,
-					"BlackLevel": BlackValue,
+					"BlackLevel": BlackLevel,
 					"CyanModel": Cyan,
-					"CyanLevel": CyanValue,
+					"CyanLevel": CyanLevel,
 					"MagentaModel": Magenta,
-					"MagentaLevel": MagentaValue,
+					"MagentaLevel": MagentaLevel,
 					"YellowModel": Yellow,
-					"YellowLevel": YellowValue,
+					"YellowLevel": YellowLevel,
 					}
 				upload = requests.post(url, verify=False, json=data)
 				print(upload.status_code)
 				del Black
-				del BlackValue
+				del BlackLevel
 				del Cyan
-				del CyanValue
+				del CyanLevel
 				del Magenta
-				del MagentaValue
+				del MagentaLevel
 				del Yellow
-				del YellowValue	
+				del YellowLevel	
 			if not tonerArea1 and not tonerArea2 and not tonerArea3 and not tonerArea4 and not tonerArea5:
 				url = "http://" + printerIp + "/web/guest/en/websys/webArch/getStatus.cgi"
 				print(url)
@@ -540,6 +580,14 @@ with open("c:/windows/temp/extip.log", "w") as outfile:
 						print(MagentaLevel)
 						print(YellowLevel)
 
+						if ('<' in BlackValue):
+							BlackValue = '0'
+						if('<' in CyanValue):
+								CyanValue = '0'
+						if('<' in MagentaValue):
+								MagentaValue = '0'
+						if('<' in YellowValue):
+								YellowValue = '0'
 						url = "http://ctacinv/api/PrinterLevels?PythonScript=true"
 						data = {
 							"PrinterName": printerName,
@@ -599,6 +647,14 @@ with open("c:/windows/temp/extip.log", "w") as outfile:
 								print(CyanLevel)
 								print(MagentaLevel)
 								print(YellowLevel)
+								if ('<' in BlackValue):
+									BlackValue = '0'
+								if('<' in CyanValue):
+									CyanValue = '0'
+								if('<' in MagentaValue):
+									MagentaValue = '0'
+								if('<' in YellowValue):
+									YellowValue = '0'
 								url = "http://ctacinv/api/PrinterLevels?PythonScript=true"
 								data = {
 									"PrinterName": printerName,
