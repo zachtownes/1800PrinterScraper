@@ -488,7 +488,7 @@ with open("c:/windows/temp/extip.log", "w") as outfile:
 					Magenta = Magenta.replace('\r', '').replace('\n', '').replace("Order","").replace("?", "").replace("†","")
 					Magenta = Magenta.replace('Magenta Cartridge', ' ').replace(' ', '')
 					MagentaLevel = tonerValues[2].getText()
-					MagentaLevel = MagentaLevel.replace('\r', '').replace('\n', '').replace(' ', '').replace("†","").replace("*","").replace("%","").replace.replace('‡','')
+					MagentaLevel = MagentaLevel.replace('\r', '').replace('\n', '').replace(' ', '').replace("†","").replace("*","").replace("%","").replace('‡','')
 					if('-' in MagentaLevel):
 						MagentaLevel = '0'
 					MagentaToner = Magenta + " " + MagentaLevel
@@ -510,14 +510,14 @@ with open("c:/windows/temp/extip.log", "w") as outfile:
 				except IndexError:
 					Yellow = ""
 					YellowLevel = ""
-				if ('<' in BlackValue):
-						BlackValue = '0'
-				if('<' in CyanValue):
+				if ('<' in BlackLevel):
+						BlackLevel = '0'
+				if('<' in CyanLevel):
 						CyanValue = '0'
-				if('<' in MagentaValue):
-						MagentaValue = '0'
-				if('<' in YellowValue):
-						YellowValue = '0'
+				if('<' in MagentaLevel):
+						MagentaLevel = '0'
+				if('<' in YellowLevel):
+						YellowLevel = '0'
 				url = "http://ctacinv/api/PrinterLevels?PythonScript=true"
 				data = {
 					"PrinterName": printerName,
@@ -579,15 +579,6 @@ with open("c:/windows/temp/extip.log", "w") as outfile:
 						print(CyanLevel)
 						print(MagentaLevel)
 						print(YellowLevel)
-
-						if ('<' in BlackValue):
-							BlackValue = '0'
-						if('<' in CyanValue):
-								CyanValue = '0'
-						if('<' in MagentaValue):
-								MagentaValue = '0'
-						if('<' in YellowValue):
-								YellowValue = '0'
 						url = "http://ctacinv/api/PrinterLevels?PythonScript=true"
 						data = {
 							"PrinterName": printerName,
@@ -647,14 +638,6 @@ with open("c:/windows/temp/extip.log", "w") as outfile:
 								print(CyanLevel)
 								print(MagentaLevel)
 								print(YellowLevel)
-								if ('<' in BlackValue):
-									BlackValue = '0'
-								if('<' in CyanValue):
-									CyanValue = '0'
-								if('<' in MagentaValue):
-									MagentaValue = '0'
-								if('<' in YellowValue):
-									YellowValue = '0'
 								url = "http://ctacinv/api/PrinterLevels?PythonScript=true"
 								data = {
 									"PrinterName": printerName,
