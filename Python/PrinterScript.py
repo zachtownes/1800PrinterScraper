@@ -46,7 +46,7 @@ with open("c:/windows/temp/extip.log", "w") as outfile:
 					if ('-' in BlackLevel):
 						BlackLevel = '0'
 					if ('<' in BlackLevel):
-						BlackLevel = '0'
+						BlackLevel = '5'
 					BlackToner = Black + " " + BlackLevel
 					print(BlackToner)
 				except IndexError:
@@ -62,7 +62,7 @@ with open("c:/windows/temp/extip.log", "w") as outfile:
 					if('-' in CyanLevel):
 						CyanLevel = '0'
 					if('<' in CyanLevel):
-						CyanLevel = '0'
+						CyanLevel = '5'
 					CyanToner = Cyan + " " + CyanLevel
 					print(CyanToner)
 				except IndexError:
@@ -78,7 +78,7 @@ with open("c:/windows/temp/extip.log", "w") as outfile:
 					if('-' in MagentaLevel):
 						MagentaLevel = '0'
 					if('<' in MagentaLevel):
-						MagentaLevel = '0'
+						MagentaLevel = '5'
 					MagentaToner = Magenta + " " + MagentaLevel
 					print(MagentaToner)
 				except IndexError:
@@ -94,7 +94,7 @@ with open("c:/windows/temp/extip.log", "w") as outfile:
 					if( '-' in YellowLevel):
 						YellowLevel = '0'
 					if('<' in YellowLevel):
-						YellowLevel = '0'
+						YellowLevel = '5'
 					YellowToner = Yellow + " " + YellowLevel
 					print(YellowToner)
 				except IndexError:
@@ -143,30 +143,40 @@ with open("c:/windows/temp/extip.log", "w") as outfile:
 						BlackLevel = TonerLevel.replace("†","").replace("*","").replace("%","").replace('‡','')
 						if('-' in BlackLevel):
 							BlackLevel = '0'
+						if ('<' in BlackLevel):
+							BlackLevel = '5'	
 					if("cyan" in TonerName):
 						print("CYAN!")
 						CyanModel = TonerModel.replace("Order","").replace("?", "").replace("†","")
 						CyanLevel = TonerLevel.replace("†","").replace("*","").replace("%","").replace('‡','')
 						if('-' in CyanLevel):
 							CyanLevel = '0'
+						if('<' in CyanLevel):
+							CyanLevel = '5'
 					if("Magenta" in TonerName):
 						print("MAGENTA!")
 						MagentaModel = TonerModel.replace("Order","").replace("?", "").replace("†","")
 						MagentaLevel = TonerLevel.replace("†","").replace("*","").replace("%","").replace('‡','')
 						if('-' in MagentaLevel):
 							MagentaLevel = '0'
+						if('<' in MagentaLevel):
+							MagentaLevel = '5'
 					if("Yellow" in TonerName):
 						print("YELLOW!")
 						YellowModel = TonerModel.replace("Order","").replace("?", "").replace("†","")
 						YellowLevel = TonerLevel.replace("†","").replace("*","").replace("%","").replace('<', '').replace('‡','')
 						if('-' in YellowLevel):
 							YellowLevel = '0'
+						if('<' in YellowLevel):
+							YellowLevel = '5'
 					if("Maint" in TonerName):
 						print("MAINTINENCE!")
 						MaintinenceModel = TonerModel.replace("Order","").replace("?", "").replace("†","")
 						MaintinenceLevel = TonerLevel.replace("†","").replace("*","").replace("%","").replace('‡','')
 						if('-' in MaintinenceLevel):
 							MaintinenceLevel = '0'
+						if('<' in MaintinenceLevel):
+							MaintinenceLevel = '5'
 				try: 
 					BlackModel
 				except NameError:
@@ -192,14 +202,6 @@ with open("c:/windows/temp/extip.log", "w") as outfile:
 				except NameError:
 					MaintinenceModel = ""
 					MaintinenceLevel = ""
-				if ('<' in BlackLevel):
-						BlackLevel = '0'
-				if('<' in CyanLevel):
-						CyanLevel = '0'
-				if('<' in MagentaLevel):
-						MagentaLevel = '0'
-				if('<' in YellowLevel):
-						YellowLevel = '0'
 				url = "http://ctacinv/api/PrinterLevels?PythonScript=true"
 				data = {
 					"PrinterName": printerName,
@@ -249,6 +251,8 @@ with open("c:/windows/temp/extip.log", "w") as outfile:
 							BlackLevel = TonerLevel.replace("†","").replace("*","").replace("%","").replace('<', '').replace('‡','')
 							if('-' in BlackLevel):
 								BlackLevel = '0'
+							if ('<' in BlackLevel):
+								BlackLevel = '5'
 						if("cyan" in TonerName):
 							print("CYAN!")
 							CyanModel = TonerModel.replace('\r', '').replace('\n', '').replace("Order","").replace("?", "").replace("†","")
@@ -256,6 +260,8 @@ with open("c:/windows/temp/extip.log", "w") as outfile:
 							CyanLevel = TonerLevel.replace("†","").replace("*","").replace("%","").replace('‡','')
 							if('-' in CyanLevel):
 								CyanLevel = '0'
+							if('<' in CyanLevel):
+								CyanLevel = '5'
 						if("Magenta" in TonerName):
 							print("MAGENTA!")
 							MagentaModel = TonerModel.replace('\r', '').replace('\n', '').replace("Order","").replace("?", "").replace("†","")
@@ -263,6 +269,8 @@ with open("c:/windows/temp/extip.log", "w") as outfile:
 							MagentaLevel = TonerLevel.replace("†","").replace("*","").replace("%","").replace('‡','')
 							if('-' in MagentaLevel):
 								MagentaLevel = '0'
+							if('<' in MagentaLevel):
+								MagentaLevel = '5'
 						if("Yellow" in TonerName):
 							print("YELLOW!")
 							YellowModel = TonerModel.replace('\r', '').replace('\n', '').replace("Order","").replace("?", "").replace("†","")
@@ -270,6 +278,8 @@ with open("c:/windows/temp/extip.log", "w") as outfile:
 							YellowLevel = TonerLevel.replace("†","").replace("*","").replace("%","").replace('‡','')
 							if('-' in YellowLevel):
 								YellowLevel = '0'
+							if('<' in YellowLevel):
+								YellowLevel = '5'
 						if("Maint" in TonerName):
 							print("MAINTINENCE!")
 							MaintinenceModel = TonerModel.replace('\r', '').replace('\n', '').replace("Order","").replace("?", "").replace("†","")
@@ -277,6 +287,8 @@ with open("c:/windows/temp/extip.log", "w") as outfile:
 							MaintinenceLevel = TonerLevel.replace("†","").replace("*","").replace("%","").replace('‡','')
 							if('-' in MaintinenceLevel):
 								MaintinenceLevel = '0'
+							if('<' in MaintinenceLevel):
+								MaintinenceLevel = '5'
 				except IndexError:
 					print("IndexComplete")
 				try: 
@@ -324,14 +336,6 @@ with open("c:/windows/temp/extip.log", "w") as outfile:
 					MaintinenceLevel = ""
 					print(MaintinenceModel)
 					print(MaintinenceLevel)
-				if ('<' in BlackLevel):
-						BlackLevel = '0'
-				if('<' in CyanLevel):
-						CyanLevel = '0'
-				if('<' in MagentaLevel):
-						MagentaLevel = '0'
-				if('<' in YellowLevel):
-						YellowLevel = '0'
 				url = "http://ctacinv/api/PrinterLevels?PythonScript=true"
 				data = {
 					"PrinterName": printerName,
@@ -372,6 +376,8 @@ with open("c:/windows/temp/extip.log", "w") as outfile:
 					BlackLevel = BlackLevel.replace('\r', '').replace('\n', '').replace(' ', '').replace("†","").replace("*","").replace("%","").replace('‡','')
 					if('-' in BlackLevel):
 						BlackLevel = '0'
+					if ('<' in BlackLevel):
+						BlackLevel = '5'
 					BlackToner = Black + " " + BlackLevel
 					print(BlackToner)
 				except IndexError:
@@ -386,6 +392,8 @@ with open("c:/windows/temp/extip.log", "w") as outfile:
 					CyanLevel = CyanLevel.replace('\r', '').replace('\n', '').replace(' ', '').replace("†","").replace("*","").replace("%","").replace('‡','')
 					if('-' in CyanLevel):
 						CyanLevel = '0'
+					if('<' in CyanLevel):
+						CyanLevel = '5'
 					CyanToner = Cyan + " " + CyanLevel
 					print(CyanToner)
 				except IndexError:
@@ -400,6 +408,8 @@ with open("c:/windows/temp/extip.log", "w") as outfile:
 					MagentaLevel = MagentaLevel.replace('\r', '').replace('\n', '').replace(' ', '').replace("†","").replace("*","").replace("%","").replace('‡','')
 					if('-' in MagentaLevel):
 						MagentaLevel = '0'
+					if('<' in MagentaLevel):
+						MagentaLevel = '5'
 					MagentaToner = Magenta + " " + MagentaLevel
 					print(MagentaToner)
 				except IndexError:
@@ -414,19 +424,13 @@ with open("c:/windows/temp/extip.log", "w") as outfile:
 					YellowLevel = YellowLevel.replace('\r', '').replace('\n', '').replace(' ', '').replace("†","").replace("*","").replace("%","").replace('‡','')
 					if('-' in YellowLevel):
 						YellowLevel = '0'
+					if('<' in YellowLevel):
+						YellowLevel = '5'
 					YellowToner = Yellow + " " + YellowLevel
 					print(YellowToner)
 				except IndexError:
 					Yellow = ""
 					YellowLevel = ""
-				if ('<' in BlackLevel):
-						BlackLevel = '0'
-				if('<' in CyanLevel):
-						CyanLevel = '0'
-				if('<' in MagentaLevel):
-						MagentaLevel = '0'
-				if('<' in YellowLevel):
-						YellowLevel = '0'
 				url = "http://ctacinv/api/PrinterLevels?PythonScript=true"
 				data = {
 					"PrinterName": printerName,
@@ -463,6 +467,8 @@ with open("c:/windows/temp/extip.log", "w") as outfile:
 					BlackLevel = BlackLevel.replace('\r', '').replace('\n', '').replace(' ', '').replace("†","").replace("*","").replace("%","").replace('‡','')
 					if('-' in BlackLevel):
 						BlackLevel = '0'
+					if ('<' in BlackLevel):
+						BlackLevel = '5'
 					BlackToner = Black + " " + BlackLevel
 					print(BlackToner)
 				except IndexError:
@@ -477,6 +483,8 @@ with open("c:/windows/temp/extip.log", "w") as outfile:
 					CyanLevel = CyanLevel.replace('\r', '').replace('\n', '').replace(' ', '').replace("†","").replace("*","").replace("%","").replace('‡','')
 					if('-' in CyanLevel):
 						CyanLevel = '0'
+					if('<' in CyanLevel):
+						CyanLevel = '5'
 					CyanToner = Cyan + " " + CyanLevel
 					print(CyanToner)
 				except IndexError:
@@ -491,6 +499,8 @@ with open("c:/windows/temp/extip.log", "w") as outfile:
 					MagentaLevel = MagentaLevel.replace('\r', '').replace('\n', '').replace(' ', '').replace("†","").replace("*","").replace("%","").replace('‡','')
 					if('-' in MagentaLevel):
 						MagentaLevel = '0'
+					if('<' in MagentaLevel):
+						MagentaLevel = '5'
 					MagentaToner = Magenta + " " + MagentaLevel
 					print(MagentaToner)
 				except IndexError:
@@ -505,19 +515,13 @@ with open("c:/windows/temp/extip.log", "w") as outfile:
 					YellowLevel = YellowLevel.replace('\r', '').replace('\n', '').replace(' ', '').replace("†","").replace("*","").replace("%","").replace('‡','')
 					if('-' in YellowLevel):
 						YellowLevel = '0'
+					if('<' in YellowLevel):
+						YellowLevel = '5'
 					YellowToner = Yellow + " " + YellowLevel
 					print(YellowToner)
 				except IndexError:
 					Yellow = ""
 					YellowLevel = ""
-				if ('<' in BlackLevel):
-						BlackLevel = '0'
-				if('<' in CyanLevel):
-						CyanValue = '0'
-				if('<' in MagentaLevel):
-						MagentaLevel = '0'
-				if('<' in YellowLevel):
-						YellowLevel = '0'
 				url = "http://ctacinv/api/PrinterLevels?PythonScript=true"
 				data = {
 					"PrinterName": printerName,
